@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="model_save_before">
+		<observer instance="Shulgin\AdminLogging\Observer\Backend\Model\SaveBefore" name="shulgin_adminlogging_observer_backend_model_savebefore_model_save_before"/>
+	</event>
+
+	<event name="model_save_after">
+		<observer instance="Shulgin\AdminLogging\Observer\Backend\Model\SaveAfter" name="shulgin_adminlogging_observer_backend_model_saveafter_model_save_after"/>
+	</event>
+
+	<event name="model_delete_before">
+		<observer instance="Shulgin\AdminLogging\Observer\Backend\Model\DeleteBefore" name="shulgin_adminlogging_observer_backend_model_deletebefore_model_delete_before"/>
+	</event>
+</config>

@@ -1,0 +1,11 @@
+# My_Module, just an example
+Api                         app/code/Shulgin/AdminLogging/Api
+Block                       app/code/Shulgin/AdminLogging/Block
+Controller                  app/code/Shulgin/AdminLogging/Controller
+etc                         app/code/Shulgin/AdminLogging/etc
+Model                       app/code/Shulgin/AdminLogging/Model
+Observer                    app/code/Shulgin/AdminLogging/Observer
+Setup                       app/code/Shulgin/AdminLogging/Setup
+Ui                          app/code/Shulgin/AdminLogging/Ui
+view                        app/code/Shulgin/AdminLogging/view
+registration.php            app/code/Shulgin/AdminLogging/registration.php

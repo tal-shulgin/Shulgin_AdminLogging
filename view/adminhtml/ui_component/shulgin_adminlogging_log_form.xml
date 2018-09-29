@@ -1,0 +1,130 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">shulgin_adminlogging_log_form.log_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\BackButton" name="back"/>
+			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\DeleteButton" name="delete"/> -->
+			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\SaveButton" name="save"/> -->
+			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\SaveAndContinueButton" name="save_and_continue"/> -->
+		</buttons>
+		<namespace>shulgin_adminlogging_log_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>shulgin_adminlogging_log_form.log_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="log_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider class="Shulgin\AdminLogging\Model\Log\DataProvider" name="log_form_data_source">
+			<settings>
+				<requestFieldName>log_id</requestFieldName>
+				<primaryFieldName>log_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label/>
+		</settings>
+
+		<field formElement="textarea" name="before_save" sortOrder="10">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<item name="unserialized" xsi:type="boolean">true</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Before Save</label>
+				<dataScope>before_save</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="textarea" name="after_save" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<item name="unserialized" xsi:type="boolean">true</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">After Save</label>
+				<dataScope>after_save</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+
+		<field formElement="input" name="user" sortOrder="30">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<item name="fit" xsi:type="boolean">false</item>
+					<item name="disabled" xsi:type="boolean">true</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">User</label>
+				<dataScope>user</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+
+		<field formElement="input" name="action" sortOrder="40">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<item name="fit" xsi:type="boolean">false</item>
+					<item name="disabled" xsi:type="boolean">true</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Action</label>
+				<dataScope>action</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="date" name="update_time" sortOrder="50">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<item name="fit" xsi:type="boolean">false</item>
+					<item name="disabled" xsi:type="boolean">true</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Update Time</label>
+				<dataScope>update_time</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+	</fieldset>
+</form>

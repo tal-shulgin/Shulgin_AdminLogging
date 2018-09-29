@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<!-- <add id="Shulgin::top_level" module="Shulgin_AdminLogging" resource="Magento_Backend::content" sortOrder="9999" title="Shulgin"/> -->
+		<!-- <add action="shulgin_adminlogging/log/index" id="Shulgin_AdminLogging::shulgin_adminlogging_log" module="Shulgin_AdminLogging" parent="Shulgin::top_level" resource="Magento_Backend::content" sortOrder="9999" title="Log"/> -->
+		<add id="Shulgin_AdminLogging::shulgin_adminlogging_log_title" 
+			 title="Admin Logging" 
+			 translate="title" 
+			 module="Magento_Backend" 
+			 sortOrder="30" 
+			 parent="Magento_Reports::report" 
+			 resource="Magento_Backend::content"/>
+
+		<add action="shulgin_adminlogging/log/index" 
+		     id="Shulgin_AdminLogging::shulgin_adminlogging_log" 
+			 module="Shulgin_AdminLogging" 
+			 parent="Shulgin_AdminLogging::shulgin_adminlogging_log_title" 
+			 resource="Magento_Backend::content" 
+			 sortOrder="9999" 
+			 title="Log"/>
+	</menu>
+</config>
