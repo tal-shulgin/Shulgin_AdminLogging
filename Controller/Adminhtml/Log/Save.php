@@ -44,7 +44,11 @@ class Save extends \Magento\Backend\App\Action
             $model->setData($data);
         
             try {
-                $model->save();
+                //$model->save();
+
+                /* 
+                $objectManager->get('\Namespace\Modulename\Model\Test\Customertest')->getCollection();
+                */
                 $this->messageManager->addSuccessMessage(__('You saved the Log.'));
                 $this->dataPersistor->clear('shulgin_adminlogging_log');
         

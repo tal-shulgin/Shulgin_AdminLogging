@@ -10,8 +10,9 @@
 	<settings>
 		<buttons>
 			<button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\BackButton" name="back"/>
+			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\RestorButton" name="restor"/> -->
 			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\DeleteButton" name="delete"/> -->
-			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\SaveButton" name="save"/> -->
+			<button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\SaveButton" name="save"/>
 			<!-- <button class="Shulgin\AdminLogging\Block\Adminhtml\Log\Edit\SaveAndContinueButton" name="save_and_continue"/> -->
 		</buttons>
 		<namespace>shulgin_adminlogging_log_form</namespace>
@@ -45,7 +46,7 @@
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">Log</item>
-					<item name="unserialized" xsi:type="boolean">true</item>
+					<!-- <item name="unserialized" xsi:type="boolean">true</item> -->
 				</item>
 			</argument>
 			<settings>
@@ -61,7 +62,7 @@
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">Log</item>
-					<item name="unserialized" xsi:type="boolean">true</item>
+					<!-- <item name="unserialized" xsi:type="boolean">true</item> -->
 				</item>
 			</argument>
 			<settings>
@@ -74,7 +75,24 @@
 			</settings>
 		</field>
 
-		<field formElement="input" name="user" sortOrder="30">
+		<field formElement="textarea" name="diff" sortOrder="30">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Log</item>
+					<!-- <item name="unserialized" xsi:type="boolean">true</item> -->
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Diff</label>
+				<dataScope>diff</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+
+		<field formElement="input" name="user" sortOrder="40">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">Log</item>
@@ -92,7 +110,7 @@
 			</settings>
 		</field>
 
-		<field formElement="input" name="action" sortOrder="40">
+		<field formElement="input" name="action" sortOrder="50">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">Log</item>
@@ -109,7 +127,7 @@
 				</validation>
 			</settings>
 		</field>
-		<field formElement="date" name="update_time" sortOrder="50">
+		<field formElement="date" name="update_time" sortOrder="60">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">
 					<item name="source" xsi:type="string">Log</item>

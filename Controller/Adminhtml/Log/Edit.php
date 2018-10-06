@@ -60,7 +60,7 @@ class Edit extends \Shulgin\AdminLogging\Controller\Adminhtml\Log
         $model->setData('before_save', $this->beautify($before));
         $model->setData('after_save',  $this->beautify($after));
 
-        $this->_logger->debug(__LINE__, [$model->getData()]);
+        //$this->_logger->debug(__LINE__, [$model->getData()]);
         $this->_coreRegistry->register('shulgin_adminlogging_log', $model);
         
         // 3. Build edit form
