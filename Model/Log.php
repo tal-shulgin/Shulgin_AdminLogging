@@ -131,4 +131,24 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     {
         return $this->setData(self::UPDATE_TIME, $updateTime);
     }
+
+
+    /**
+     * Get resource_name
+     * @return string|null
+     */
+    public function getResourceName()
+    {
+        return $this->getData(self::RESOURCE_NAME);
+    }
+
+    /**
+     * Set resource_name
+     * @param string $resourceName
+     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     */
+    public function setResourceName($resourceName)
+    {
+        return $this->setData(self::RESOURCE_NAME, $resourceName);
+    }
 }

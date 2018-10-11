@@ -70,7 +70,9 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             $this->loadedData[$model->getId()] = $model->getData();
         }
         $data = $this->dataPersistor->get('shulgin_adminlogging_log');
-        $this->_logger->debug(__LINE__, [ $this->loadedData, $data]);
+
+        //$this->_logger->debug(__LINE__, [ $this->loadedData, $data]);
+        
         if (!empty($data)) {
             $this->_logger->debug(__LINE__, []);
             $model = $this->collection->getNewEmptyItem();

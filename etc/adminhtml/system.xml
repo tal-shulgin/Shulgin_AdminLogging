@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="admin_logging" translate="label" sortOrder="100">
+            <label>Admin Logging</label>
+        </tab>
+        <section id="admin_logging_section" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <label>Admin Logging Config</label>
+            <tab>admin_logging</tab>
+            <resource>Shulgin_AdminLogging::Log</resource>
+            <group id="admin_logging_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Config</label>
+                <field id="skip" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Additional Admin Actions to skip</label>
+                    <frontend_model>Shulgin\AdminLogging\Block\Adminhtml\Form\Field\AdditionalSkip</frontend_model>
+                    <backend_model>Shulgin\AdminLogging\Config\Backend\AdditionalSkip</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

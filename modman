@@ -1,6 +1,7 @@
 # My_Module, just an example
 Api                         app/code/Shulgin/AdminLogging/Api
 Block                       app/code/Shulgin/AdminLogging/Block
+Config                      app/code/Shulgin/AdminLogging/Config
 Controller                  app/code/Shulgin/AdminLogging/Controller
 etc                         app/code/Shulgin/AdminLogging/etc
 Model                       app/code/Shulgin/AdminLogging/Model

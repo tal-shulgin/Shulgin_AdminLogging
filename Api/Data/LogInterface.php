@@ -12,6 +12,7 @@ interface LogInterface
     const LOG_ID = 'log_id';
     const AFTER_SAVE = 'after_save';
     const ACTION = 'action';
+    const RESOURCE_NAME = 'resource_name';
 
     /**
      * Get log_id
@@ -90,4 +91,17 @@ interface LogInterface
      * @return \Shulgin\AdminLogging\Api\Data\LogInterface
      */
     public function setUpdateTime($updateTime);
+
+    /**
+     * Get resource_name
+     * @return string|null
+     */
+    public function getResourceName();
+
+    /**
+     * Set resource_name
+     * @param string $resourceName
+     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     */
+    public function setResourceName($resourceName);
 }

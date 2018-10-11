@@ -15,7 +15,7 @@ class SaveBefore extends AbstractAdminLogSave implements \Magento\Framework\Even
      */
     public function execute(\Magento\Framework\Event\Observer $observer) 
     {
-        $object = $observer->getEvent();
+/*         $object = $observer->getEvent();
         $object = $object->getData('object');
 
         if ($object->hasDataChanges()) {
@@ -34,9 +34,11 @@ class SaveBefore extends AbstractAdminLogSave implements \Magento\Framework\Even
                     'before_save' => json_encode($object->getOrigData()),
                     'after_save' => json_encode($object->getData()),
                     'diff' => print_r($diff, true),
-                    'user' => $this->_adminSession->getUser()->getUserName()
+                    'user' => $this->_adminSession->getUser()->getUserName(),
+                    'resource_name' => $object->getResourceName()
                 ];
 
+                $this->_logger->debug(__LINE__, [$data]);
                 //convertToJson
                 try {
                     $log = $this->_logFactory->create();
@@ -46,26 +48,8 @@ class SaveBefore extends AbstractAdminLogSave implements \Magento\Framework\Even
                 }
                 $this->_logger->debug(__LINE__, [$data]);
             }
-        }
+        } */
     }
 
-    /**
-     * Compare object original data with data
-     * 
-     * @param OrigData $old
-     * @param Data $new
-     * @return bool
-     */
-    private function is_same($old, $new)
-    {
-        unset($old['updated_at']);
-        unset($new['updated_at']);
-        $diff = @array_diff($old, $new);
 
-        if(empty($diff)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

@@ -24,24 +24,49 @@ class DeleteBefore extends AbstractAdminLogSave implements \Magento\Framework\Ev
         $action     = $this->_request->getActionName();
         $route      = $this->_request->getRouteName();
 
-        if(!in_array($object->getResourceName(), $this->skipEvent()) && !empty($moduleName) && !empty($controller)) {
+        // Skip Resource Or Routes
+        if ( 
+            in_array($object->getResourceName(), $this->skipEvent()) || 
+            in_array($moduleName.'_'.$controller.'_'.$action, $this->skipEvent()) 
+       ) {
+           return null;
+       }
+
+        if(!empty($moduleName) && !empty($controller)) 
+        {
+            $old = $object->getOrigData();
+            $new = $object->getData();
+
+
+            if ($moduleName.'_'.$controller.'_'.$action == 'admin_system_config_save') 
+            {
+                $new = $this->handleSystemConfigSave($new);
+                $old = $new;
+
+                $old['value'] = !!$old['value'];
+                $diff = @array_diff($object->getOrigData(), $object->getData());
+                $this->clearDiffData($diff);
+            } 
 
             $data = [
                 'action' => $moduleName.'_'.$controller.'_'.$action,
-                'before_save' => json_encode($object->getOrigData()),
-                'after_save' => '',
-                'diff' => '',
-                'user' => $this->_adminSession->getUser()->getUserName()
+                'before_save' => json_encode(var_export($old,true)),
+                'after_save' => json_encode(var_export($new,true)),
+                'diff' => var_export(isset($diff) ? $diff : '', true),
+                'user' => $this->_adminSession->getUser()->getUserName(),
+                'resource_name' => $object->getResourceName()
             ];
             
-            //convertToJson
             try {
-                $log = $this->_logFactory->create();
-                $log->addData($data)->save();
+                $res = $this->_logResource->insertDataWithoutSave($data);
+                $this->_logger->debug(__LINE__, [$res]);
             } catch (\Exception $e) {
-                $this->_logger->debug(__LINE__, [$data, $e->getMessage()]);
+                if(isset($data)) {
+                    $this->_logger->debug(__LINE__, [$data, $e->getMessage()]);
+                } else {
+                    $this->_logger->debug(__LINE__, [$e->getMessage()]);
+                }
             }
-            $this->_logger->debug(__LINE__, [$data]);
         }
     }
 }
