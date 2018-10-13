@@ -1,10 +1,12 @@
 <?php
 
-
 namespace Shulgin\AdminLogging\Api;
 
 use Magento\Framework\Api\SearchCriteriaInterface;
 
+/**
+ * interface LogRepositoryInterface
+ */
 interface LogRepositoryInterface
 {
 

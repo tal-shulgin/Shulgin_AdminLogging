@@ -162,28 +162,88 @@ abstract class AbstractAdminLogSave
      * 
      * @return result | diff
      */
-    protected function check_diff_multi($array1, $array2)
+    protected function getObjectDiff($object)
     {
         $result = [];
+        $old = $object->getOrigData();
 
-        if(is_array($array1) || is_array($array2))
+        foreach($old as $key => $value )
+        {
+            if($object->dataHasChangedFor($key)) {
+                $result[$key] = $value;
+            }
+        }
+
+        $this->clearDiffData($result);
+        return $result;
+    }
+
+    /**
+     * Convert array dump to json.
+     * 
+     * @param array $array | array to convert
+     * @return string | json string
+     */
+    protected function arrayDumpTojson($array)
+    {
+        if(empty($array)) 
         {
             return '';
         }
 
-        foreach($array1 as $key => $val) 
-        {
-            if(isset($array2[$key]))
-            {
-                if(is_array($val) && $array2[$key]){
-                    $result[$key] = $this->check_diff_multi($val, $array2[$key]);
-                }
+        return json_encode(var_export($array, true));
+    }
 
+    protected function preDataSave($action, $rout, $object)
+    {
+        $old = $object->getOrigData();
+        $new = $object->getData();
+        $diff = [];
+        $data = [];
+
+        if($action == 'new' || $action == 'dell' ) 
+        {
+            // system config hendle.
+            if ($rout == 'admin_system_config_save') 
+            {
+                $new  = $this->handleSystemConfigSave($new);
+                $diff = $this->getObjectDiff($object);
+                $old  = $new;
+
+                $old['value'] = !!$old['value'];
+            }
+
+            if ($rout == 'cms_block_save') {
+                $data['block_id'] = $object->getId();
+            }
+
+            if($rout == 'admin_system_config_save' && empty($diff)) 
+            {
+                return null;
+            } 
+
+        } elseif($action == 'exsist')
+        {
+            $diff = $this->getObjectDiff($object);
+
+            if(empty($diff)){
+                return null;
             } else {
-                $result[$key] = $val;
+
+                if ($rout == 'cms_block_save') {
+                    $data['block_id'] = $object->getId();
+                }
             }
         }
 
-        return $result;
+        return  array_merge($data, [
+            'user'          => $this->_adminSession->getUser()->getUserName(),
+            'diff'          => isset($diff) ? $this->arrayDumpTojson($diff) : '',
+            'action'        => $rout,
+            'after_save'    => $this->arrayDumpTojson($new),
+            'before_save'   => $this->arrayDumpTojson($old),
+            'resource_name' => $object->getResourceName()
+        ]);
+
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
-
 namespace Shulgin\AdminLogging\Api\Data;
 
+/**
+ * interface LogSearchResultsInterface
+ */
 interface LogSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
 {
 

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Shulgin\AdminLogging\Controller\Adminhtml;
 
 abstract class Log extends \Magento\Backend\App\Action

@@ -10,12 +10,16 @@
 			<argument name="resourceModel" xsi:type="string">Shulgin\AdminLogging\Model\ResourceModel\Log\Collection</argument>
 		</arguments>
 	</virtualType>
-	
+
 	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
 		<arguments>
 			<argument name="collections" xsi:type="array">
 				<item name="shulgin_adminlogging_log_listing_data_source" xsi:type="string">Shulgin\AdminLogging\Model\ResourceModel\Log\Grid\Collection</item>
+				<!-- cms block grid -->
+				<item name="shulgin_adminlogging_cms_block_history_data_source" xsi:type="string">Shulgin\AdminLogging\Model\ResourceModel\Log\Grid\Collection</item>
+				<!-- END cms block grid -->
 			</argument>
 		</arguments>
 	</type>
+	
 </config>

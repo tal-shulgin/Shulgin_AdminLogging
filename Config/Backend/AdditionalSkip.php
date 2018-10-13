@@ -1,9 +1,4 @@
 <?php
-/**
- * @author Atwix Team
- * @copyright Copyright (c) 2018 Atwix (https://www.atwix.com/)
- * @package Atwix_DynamicFields
- */
 
 namespace Shulgin\AdminLogging\Config\Backend;
 

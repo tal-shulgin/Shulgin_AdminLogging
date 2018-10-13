@@ -1,0 +1,56 @@
+<?php
+
+use Shulgin\AdminLogging\Api\Data\LogInterface;
+
+$data = $this->getLogData();
+
+$beforeSave = isset($data[LogInterface::BEFORE_SAVE]) ? json_decode($data[LogInterface::BEFORE_SAVE]) :'';
+$afterSave = isset($data[LogInterface::AFTER_SAVE]) ? json_decode($data[LogInterface::AFTER_SAVE]) :'';
+$diff = isset($data[LogInterface::DIFF]) ? $data[LogInterface::DIFF] :'';
+?>
+
+<div class="admin__field">
+    <label class="admin__field-label">Before Save</label>
+    <div class="admin__field-control">
+        <?= $this->dumper($beforeSave) ?>
+    </div>
+</div>
+
+<div class="admin__field">
+    <label class="admin__field-label">After Save</label>
+    <div class="admin__field-control">
+        <?= $this->dumper($afterSave) ?>
+    </div>
+</div>
+
+<div class="admin__field">
+    <label class="admin__field-label">Diff</label>
+    <div class="admin__field-control">
+        <?= $this->dumper($diff) ?>
+    </div>
+</div>
+
+<style>
+    .admin__scope-old .admin__field > .admin__field-label {
+        width: calc( (100%) * .25 - 30px );
+        float: left;
+        margin-left: 30px;
+    }
+
+    .admin__scope-old .admin__field>.admin__field-control {
+        width: calc( (100%) * .5 - 30px );
+        float: left;
+        margin-left: 30px;
+    }
+
+    .admin__fieldset > .admin__scope-old .admin__field {
+        margin-bottom: 3rem;
+        position: relative;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        margin-left: -30px;
+        overflow: hidden;
+    }
+    pre.sf-dump, pre.sf-dump .sf-dump-default {z-index: 500;}
+</style>

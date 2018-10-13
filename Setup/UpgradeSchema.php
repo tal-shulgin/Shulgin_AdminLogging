@@ -26,7 +26,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
 
 		}
 
+		if(version_compare($context->getVersion(), '1.0.2', '<')) {
 
+			$installer->getConnection()->addColumn(
+				$installer->getTable( 'shulgin_adminlogging_log' ),
+				'block_id',
+                [
+					'type' => \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+					'nullable' => true,
+					'comment' => 'block_id',
+				]
+            );
+
+		}
 
 		$installer->endSetup();
 	}

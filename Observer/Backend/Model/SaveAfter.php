@@ -17,10 +17,12 @@ class SaveAfter extends AbstractAdminLogSave implements \Magento\Framework\Event
     {
         $object = $observer->getEvent();
         $object = $object->getData('object');
+
         $moduleName = $this->_request->getModuleName();
         $controller = $this->_request->getControllerName();
         $action     = $this->_request->getActionName();
         $route      = $this->_request->getRouteName();
+        //$user       = $this->_adminSession->getUser()->getUserName();
 
         // Skip Resource Or Routes
         if ( 
@@ -32,51 +34,12 @@ class SaveAfter extends AbstractAdminLogSave implements \Magento\Framework\Event
 
         if ($object->isObjectNew()) {
             // new Object
-
             if (!empty($moduleName) && !empty($controller) && !empty($action)) {
-                $old = $object->getOrigData();
-                $new = $object->getData();
-    
-                // system config hendle.
-                if ($moduleName.'_'.$controller.'_'.$action == 'admin_system_config_save') 
-                {
-                    $new = $this->handleSystemConfigSave($new);
-                    $old = $new;
-    
-                    $old['value'] = !!$old['value'];
-                    $diff = @array_diff($old, $new);
-                    $this->clearDiffData($diff);
-                } 
-    
-                $data = [
-                    'action' => $moduleName.'_'.$controller.'_'.$action,
-                    'before_save' => json_encode(var_export($old,true)),
-                    'after_save' => json_encode(var_export($new,true)),
-                    'diff' => var_export(isset($diff) ? $diff : '', true),
-                    'user' => $this->_adminSession->getUser()->getUserName(),
-                    'resource_name' => $object->getResourceName()
-                ];
-                
+                $data = $this->preDataSave('new', $moduleName . '_' . $controller . '_' . $action, $object);
             }
 
         } elseif($object->hasDataChanges()) {
-            
-            $old = $object->getOrigData();
-            $new = $object->getData();
-
-            $diff = $this->check_diff_multi($old, $new);
-
-            if ( !$this->is_same($old, $new) && !empty($moduleName) && !empty($controller) && !empty($action)) {
-                $data = [
-                    'action' => $moduleName . '_' . $controller . '_' . $action,
-                    'before_save' => json_encode($old),
-                    'after_save' => json_encode($new),
-                    'diff' => var_export($diff, true),
-                    'user' => $this->_adminSession->getUser()->getUserName(),
-                    'resource_name' => $object->getResourceName()
-                ];
-                
-            }
+            $data = $this->preDataSave('exsist', $moduleName . '_' . $controller . '_' . $action, $object);
         } 
 
         try {

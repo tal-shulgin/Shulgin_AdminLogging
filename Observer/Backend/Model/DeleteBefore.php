@@ -32,40 +32,20 @@ class DeleteBefore extends AbstractAdminLogSave implements \Magento\Framework\Ev
            return null;
        }
 
-        if(!empty($moduleName) && !empty($controller)) 
-        {
-            $old = $object->getOrigData();
-            $new = $object->getData();
+        if (!empty($moduleName) && !empty($controller) && !empty($action)) {
+            $data = $this->preDataSave('exsist', $moduleName . '_' . $controller . '_' . $action, $object);
+        }
 
-
-            if ($moduleName.'_'.$controller.'_'.$action == 'admin_system_config_save') 
-            {
-                $new = $this->handleSystemConfigSave($new);
-                $old = $new;
-
-                $old['value'] = !!$old['value'];
-                $diff = @array_diff($object->getOrigData(), $object->getData());
-                $this->clearDiffData($diff);
-            } 
-
-            $data = [
-                'action' => $moduleName.'_'.$controller.'_'.$action,
-                'before_save' => json_encode(var_export($old,true)),
-                'after_save' => json_encode(var_export($new,true)),
-                'diff' => var_export(isset($diff) ? $diff : '', true),
-                'user' => $this->_adminSession->getUser()->getUserName(),
-                'resource_name' => $object->getResourceName()
-            ];
-            
-            try {
+        try {
+            if(!empty($data)) {
                 $res = $this->_logResource->insertDataWithoutSave($data);
                 $this->_logger->debug(__LINE__, [$res]);
-            } catch (\Exception $e) {
-                if(isset($data)) {
-                    $this->_logger->debug(__LINE__, [$data, $e->getMessage()]);
-                } else {
-                    $this->_logger->debug(__LINE__, [$e->getMessage()]);
-                }
+            }
+        } catch (\Exception $e) {
+            if(isset($data)) {
+                $this->_logger->debug(__LINE__, [$data, $e->getMessage()]);
+            } else {
+                $this->_logger->debug(__LINE__, [$e->getMessage()]);
             }
         }
     }

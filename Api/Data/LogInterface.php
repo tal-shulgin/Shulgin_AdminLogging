@@ -1,8 +1,10 @@
 <?php
 
-
 namespace Shulgin\AdminLogging\Api\Data;
 
+/**
+ * interface LogInterface
+ */
 interface LogInterface
 {
 
@@ -13,6 +15,8 @@ interface LogInterface
     const AFTER_SAVE = 'after_save';
     const ACTION = 'action';
     const RESOURCE_NAME = 'resource_name';
+    const DIFF = 'diff';
+    Const BLOCK_ID = 'block_id';
 
     /**
      * Get log_id
@@ -91,6 +95,32 @@ interface LogInterface
      * @return \Shulgin\AdminLogging\Api\Data\LogInterface
      */
     public function setUpdateTime($updateTime);
+
+    /**
+     * Get diff
+     * @return string|null
+     */
+    public function getDiff();
+
+    /**
+     * Set diff
+     * @param string $diff
+     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     */
+    public function setDiff($diff);
+
+    /**
+     * Get cms block id
+     * @return string|null
+     */
+    public function getBlockId();
+
+    /**
+     * Set cms block id
+     * @param string $block_id
+     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     */
+    public function setBlockId($block_id);
 
     /**
      * Get resource_name

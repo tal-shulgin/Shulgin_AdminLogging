@@ -1,0 +1,115 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">shulgin_adminlogging_cms_block_history.shulgin_adminlogging_cms_block_history_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>shulgin_adminlogging_log_columns</spinner>
+		<deps>
+			<dep>shulgin_adminlogging_cms_block_history.shulgin_adminlogging_cms_block_history_data_source</dep>
+		</deps>
+	</settings>
+
+    <dataSource name="shulgin_adminlogging_cms_block_history_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">block_id</param>
+            </storageConfig>
+			<filterUrlParams>
+                <param name="block_id">*</param>
+            </filterUrlParams>
+            <updateUrl path="mui/index/render"/>
+            <renderUrl path="mui/index/render"/>
+            <autoRender>false</autoRender>
+            <realTimeLink>true</realTimeLink>
+        </settings>
+		
+        <aclResource>Shulgin_AdminLogging::Log</aclResource> 
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="shulgin_adminlogging_cms_block_history_data_source">
+            <settings>
+                <requestFieldName>block_id</requestFieldName>
+                <primaryFieldName>block_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>false</sticky>
+		</settings>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+    
+	<columns name="shulgin_adminlogging_log_columns">
+		<settings></settings>
+
+		<column name="log_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+
+		<column name="block_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">block_id</label>
+                <indexField>block_id</indexField>
+				<visible>false</visible>
+			</settings>
+		</column>
+
+		<column name="user" sortOrder="10">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">USER</label>
+				<bodyTmpl>ui/grid/cells/html</bodyTmpl>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+
+		<column name="update_time" sortOrder="30">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Update Time</label>
+				<editor>
+					<editorType>date</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+
+		<column name="diff" sortOrder="40">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Diff</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+
+		<actionsColumn class="Shulgin\AdminLogging\Ui\Component\Listing\Column\LogActions" name="actions" sortOrder="999">
+			<settings>
+				<indexField>log_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+
+	</columns>
+</listing>

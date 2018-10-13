@@ -1,17 +1,19 @@
 <?php
 
-
 namespace Shulgin\AdminLogging\Model;
 
 use Shulgin\AdminLogging\Api\Data\LogInterface;
 
+/**
+ * @implements Shulgin\AdminLogging\Api\Data\LogInterface\LogInterface
+ */
 class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
 {
 
     protected $_eventPrefix = 'shulgin_adminlogging_log';
 
     /**
-     * @return void
+     * {@inheritdoc}
      */
     protected function _construct()
     {
@@ -19,8 +21,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get log_id
-     * @return string
+     * {@inheritdoc}
      */
     public function getLogId()
     {
@@ -28,9 +29,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set log_id
-     * @param string $logId
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setLogId($logId)
     {
@@ -38,8 +37,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get before_save
-     * @return string
+     * {@inheritdoc}
      */
     public function getBeforeSave()
     {
@@ -47,9 +45,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set before_save
-     * @param string $beforeSave
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setBeforeSave($beforeSave)
     {
@@ -57,8 +53,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get after_save
-     * @return string
+     * {@inheritdoc}
      */
     public function getAfterSave()
     {
@@ -66,9 +61,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set after_save
-     * @param string $afterSave
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setAfterSave($afterSave)
     {
@@ -76,8 +69,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get user
-     * @return string
+     * {@inheritdoc}
      */
     public function getUser()
     {
@@ -85,9 +77,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set user
-     * @param string $user
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setUser($user)
     {
@@ -95,8 +85,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get action
-     * @return string
+     * {@inheritdoc}
      */
     public function getAction()
     {
@@ -104,9 +93,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set action
-     * @param string $action
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setAction($action)
     {
@@ -114,8 +101,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Get update_time
-     * @return string
+     * {@inheritdoc}
      */
     public function getUpdateTime()
     {
@@ -123,19 +109,47 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set update_time
-     * @param string $updateTime
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setUpdateTime($updateTime)
     {
         return $this->setData(self::UPDATE_TIME, $updateTime);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getDiff()
+    {
+        return $this->getData(self::DIFF);
+    }
 
     /**
-     * Get resource_name
-     * @return string|null
+     * {@inheritdoc}
+     */
+    public function setDiff($diff)
+    {
+        return $this->setData(self::DIFF, $diff);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockId()
+    {
+        return $this->getData(self::BLOCK_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setBlockId($block_id)
+    {
+        return $this->setData(self::BLOCK_ID, $block_id);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getResourceName()
     {
@@ -143,9 +157,7 @@ class Log extends \Magento\Framework\Model\AbstractModel implements LogInterface
     }
 
     /**
-     * Set resource_name
-     * @param string $resourceName
-     * @return \Shulgin\AdminLogging\Api\Data\LogInterface
+     * {@inheritdoc}
      */
     public function setResourceName($resourceName)
     {

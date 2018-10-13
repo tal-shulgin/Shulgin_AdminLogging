@@ -6,7 +6,11 @@ namespace Shulgin\AdminLogging\Model\Log;
 use Magento\Framework\App\Request\DataPersistorInterface;
 use Shulgin\AdminLogging\Model\ResourceModel\Log\CollectionFactory;
 use Shulgin\AdvancedLogger\Logger\Logger;
+use Symfony\Component\VarDumper\VarDumper;
 
+/**
+ *  @extends Magento\Ui\DataProvider\AbstractDataProvider
+ */
 class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
 {
 
@@ -71,7 +75,7 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         }
         $data = $this->dataPersistor->get('shulgin_adminlogging_log');
 
-        //$this->_logger->debug(__LINE__, [ $this->loadedData, $data]);
+
         
         if (!empty($data)) {
             $this->_logger->debug(__LINE__, []);
@@ -84,12 +88,15 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         return $this->loadedData;
     }
 
+    /**
+     * 
+     */
     private function beautify($value)
     {
         if(!empty($value)){
             $value = json_decode($value);
         }
-
+        
         return print_r($value, true);
     }
 }
