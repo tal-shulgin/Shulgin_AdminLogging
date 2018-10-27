@@ -5,12 +5,14 @@
     "license": "proprietary",
     "authors": [
         {
-            "email": "info@mage2gen.com",
-            "name": "Mage2Gen"
+            "email": "shulgin23@gmail.com",
+            "name": "tal shulgin"
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "symfony/var-dumper": "^3.4"
+    },
     "autoload": {
         "psr-4": {
             "Shulgin\\AdminLogging\\": ""
