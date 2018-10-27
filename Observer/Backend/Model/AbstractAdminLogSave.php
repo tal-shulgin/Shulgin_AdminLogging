@@ -227,6 +227,10 @@ abstract class AbstractAdminLogSave
                 $data['block_id'] = $object->getId();
             }
 
+            if ($rout == 'cms_page_save') {
+                $data['page_id'] = $object->getId();
+            }
+
         } elseif($action == 'exsist')
         {
             $diff = $this->getObjectDiff($object);
@@ -237,6 +241,10 @@ abstract class AbstractAdminLogSave
 
                 if ($rout == 'cms_block_save') {
                     $data['block_id'] = $object->getId();
+                }
+
+                if ($rout == 'cms_page_save') {
+                    $data['page_id'] = $object->getId();
                 }
             }
         }
