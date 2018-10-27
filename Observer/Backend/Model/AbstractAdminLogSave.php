@@ -129,11 +129,13 @@ abstract class AbstractAdminLogSave
     }
 
     /**
-     * Clean unnedded data from diff array.
+     * Clean unnedded data from array.
      */
-    protected function clearDiffData(&$diff)
+    protected function clearArrayData(&$array)
     {
-        unset($diff['update_time']);
+        unset($array['update_time']);
+        unset($array['form_key']);
+        unset($array['updated_at']);
     }
 
     /**
@@ -145,30 +147,16 @@ abstract class AbstractAdminLogSave
      */
     protected function is_same($old, $new)
     {
-        unset($old['updated_at']);
-        unset($new['updated_at']);
-        $diff = $this->check_diff_multi($old, $new);
+        $this->clearArrayData($old);
+        $this->clearArrayData($new);
+
+        $diff = $this->checkDifference($old, $new);
 
         if(empty($diff)) {
             return true;
         } else {
             return false;
         }
-    }
-
-    protected function check_diff_multi($array1, $array2){
-        $result = array();
-        foreach($array1 as $key => $val) {
-             if(isset($array2[$key])){
-               if(is_array($val) && $array2[$key]){
-                   $result[$key] = check_diff_multi($val, $array2[$key]);
-               }
-           } else {
-               $result[$key] = $val;
-           }
-        }
-    
-        return $result;
     }
 
     /**
@@ -185,7 +173,6 @@ abstract class AbstractAdminLogSave
             return $result;
         }
 
-        //$this->_logger->debug(__LINE__, [$old]);
         foreach($old as $key => $value )
         {
             if($object->dataHasChangedFor($key)) {
@@ -193,12 +180,12 @@ abstract class AbstractAdminLogSave
             }
         }
 
-        $this->clearDiffData($result);
+        $this->clearArrayData($result);
         return $result;
     }
 
     /**
-     * Convert array dump to json.
+     * Convert array to json.
      * 
      * @param array $array | array to convert
      * @return string | json string
@@ -209,18 +196,20 @@ abstract class AbstractAdminLogSave
         {
             return '';
         }
-        //$this->_logger->debug(__LINE__, [json_encode($array, true), serialize($array)]);
+
         return serialize($array);
-        return json_encode($array, true);
     }
 
+    /**
+     * Prepare data to be saved as log record. 
+     */
     protected function preDataSave($action, $rout, $object)
     {
         $old = $object->getOrigData();
         $new = $object->getData();
         $diff = [];
         $data = [];
-        //$this->_logger->debug(__LINE__, [$action, $rout, $old, $new]);
+
         if($action == 'new' || $action == 'dell' ) 
         {
             if ($rout == 'cms_block_save') {
@@ -279,6 +268,9 @@ abstract class AbstractAdminLogSave
         }
     }
 
+    /**
+     * Gets diff between two arrays.
+     */
     protected function checkDifference($array1, $array2){
         $result = [];
         foreach($array1 as $key => $val) {
@@ -330,7 +322,9 @@ abstract class AbstractAdminLogSave
         $array = array_filter($array);
     }
 
-
+    /**
+     * Filter array by another array (filter by array keys) keep original values.
+     */
     protected function filterArrayByArray(&$arrayToFilter, $arrayFilterBy)
     {
         //if(!is_array($arrayToFilter) && !is_array($arrayFilterBy)) return;
