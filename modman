@@ -6,6 +6,7 @@ Controller                  app/code/Shulgin/AdminLogging/Controller
 etc                         app/code/Shulgin/AdminLogging/etc
 Model                       app/code/Shulgin/AdminLogging/Model
 Observer                    app/code/Shulgin/AdminLogging/Observer
+Plugin                      app/code/Shulgin/AdminLogging/Plugin
 Setup                       app/code/Shulgin/AdminLogging/Setup
 Ui                          app/code/Shulgin/AdminLogging/Ui
 view                        app/code/Shulgin/AdminLogging/view

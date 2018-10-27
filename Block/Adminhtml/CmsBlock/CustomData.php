@@ -55,6 +55,6 @@ class CustomData extends \Magento\Backend\Block\Template
      */
     public function dumper($value)
     {
-       return $this->dumper->dump($value);
+        return $this->dumper->dump($value);
     }
 }

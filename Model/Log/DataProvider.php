@@ -94,9 +94,10 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
     private function beautify($value)
     {
         if(!empty($value)){
-            $value = json_decode($value);
+            $value = unserialize($value);
         }
         
+        return $value;
         return print_r($value, true);
     }
 }

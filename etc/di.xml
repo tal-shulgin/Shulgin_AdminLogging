@@ -22,4 +22,8 @@
 		</arguments>
 	</type>
 	
+	<type name="Magento\Config\Model\Config">
+    	<plugin name="system_config_save" type="Shulgin\AdminLogging\Plugin\Config\AroundSaveConfig"/>
+	</type>
+
 </config>

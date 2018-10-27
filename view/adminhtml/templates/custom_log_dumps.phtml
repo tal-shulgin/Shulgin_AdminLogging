@@ -4,9 +4,11 @@ use Shulgin\AdminLogging\Api\Data\LogInterface;
 
 $data = $this->getLogData();
 
-$beforeSave = isset($data[LogInterface::BEFORE_SAVE]) ? json_decode($data[LogInterface::BEFORE_SAVE]) :'';
-$afterSave = isset($data[LogInterface::AFTER_SAVE]) ? json_decode($data[LogInterface::AFTER_SAVE]) :'';
-$diff = isset($data[LogInterface::DIFF]) ? $data[LogInterface::DIFF] :'';
+$beforeSave = isset($data[LogInterface::BEFORE_SAVE]) ? unserialize($data[LogInterface::BEFORE_SAVE]) :'';
+$afterSave = isset($data[LogInterface::AFTER_SAVE]) ? unserialize($data[LogInterface::AFTER_SAVE]) :'';
+$diff = isset($data[LogInterface::DIFF]) ? unserialize($data[LogInterface::DIFF]) :'';
+//echo "<pre>";
+//print_r($data);die;
 ?>
 
 <div class="admin__field">
