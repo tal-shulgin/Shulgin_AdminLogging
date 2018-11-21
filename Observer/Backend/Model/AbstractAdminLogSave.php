@@ -269,10 +269,15 @@ abstract class AbstractAdminLogSave
     }
 
     /**
-     * Gets diff between two arrays.
-     */
+         * Gets diff between two arrays.
+         */
     protected function checkDifference($array1, $array2){
         $result = [];
+
+        if(!is_array($array1) ||!is_array($array2)) {
+            return $result;
+        }
+
         foreach($array1 as $key => $val) {
             if(isset($array2[$key]))
             {

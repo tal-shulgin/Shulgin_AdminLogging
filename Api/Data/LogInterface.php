@@ -8,15 +8,15 @@ namespace Shulgin\AdminLogging\Api\Data;
 interface LogInterface
 {
 
-    const USER = 'user';
-    const BEFORE_SAVE = 'before_save';
-    const UPDATE_TIME = 'update_time';
-    const LOG_ID = 'log_id';
-    const AFTER_SAVE = 'after_save';
-    const ACTION = 'action';
+    const DIFF          = 'diff';
+    const USER          = 'user';
+    const ACTION        = 'action';
+    const LOG_ID        = 'log_id';
+    Const BLOCK_ID      = 'block_id';
+    const AFTER_SAVE    = 'after_save';
+    const BEFORE_SAVE   = 'before_save';
+    const UPDATE_TIME   = 'update_time';
     const RESOURCE_NAME = 'resource_name';
-    const DIFF = 'diff';
-    Const BLOCK_ID = 'block_id';
 
     /**
      * Get log_id
